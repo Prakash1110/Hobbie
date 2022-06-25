@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'website/assets/css/shop.css' %}">
+<div class="container">
+    {% if cart %}
+    <a class="float-right" href="{% url 'shop:cart' %}">
+        <button class="btn btn-style-primary btn-primary" id="cart" style="font-size: larger;">
+            cart <i class="fa fa-cart-plus"></i> {{ items_in_cart.count }}
+        </button>
+    </a>
+    {% endif %}
+     <!-- row -->
+</div>
+<section>
+    <div class="container py-md-5 py-4 mb-5">
+    </div>
+</section>
+<div style="margin: 8px auto; display: block; text-align:center;">
+
+    <!---728x90--->
+     
+    </div>
+<section class="w3l-about-3 pb-5 pt-2">
+    <div class="container py-md-5 py-4 mb-5">
+        <div class="jumbotron">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6 about-2-secs-right mt-lg-0 mt-5">
+                <img src="{{ product.image.url }}" alt="" class="img-fluid img-responsive" />
+            </div>    
+            <div class="col-lg-6 pr-lg-5">
+                    <h3 class="title-big">{{product.title}}</h3>
+                    <p class="mt-2"><h4 class="title">{{product.description}}</h4></p>
+                    <ul class="list-about-2  mt-2">
+                        <li class="py-1">                            
+                            <div class="price" style="padding-bottom: 10px;">
+                                <span class="current-price">
+                                    {% if not is_enrolled %}
+                                    <h3>$<span class="current-price">{{ product.price }}</span></span></h3>
+                                    {% endif %}
+                            <!--<input type="hidden" id="total_price_of_checking_out" value="{{ course.price | floatformat:2 }}">
+                            -->
+                        </div></li>
+                        <li class="py-2">
+                            {#                            {{ --<div class="buy-btns">--}}#}
+                                {#                            {{ --<button class="btn btn-buy-now" type="button">Already purchased</button>--}}#}
+                                {#                            {{ --</div>--}}#}
+                                <div class="buy-btns" style="padding-bottom: 10px;">
+                                    {% if user.is_authenticated %}
+                             
+                                    <div class="action">
+                                        <a href="{% url 'shop:product-checkout' product.slug %}">
+                                            <button class="add-to-cart btn btn-primary">Buy Now</button>
+                                        </a>
+                                        {% if product in items_in_cart %}
+                                        <a href="{% url 'shop:cart' %}">
+                                            <button class="add-to-cart btn btn-primary cart-btn-js"
+                                            itemid="product-id-js-{{ product.id }}">Added to Cart</button>
+                                        </a>
+                                        {% else %}
+                                        <button class="add-to-cart btn btn-outline-primary cart-btn-js"
+                                            itemid="product-id-js-{{ product.id }}">Add to Cart</button>
+                                        {% endif %}
+                                        <!-- <button class="like btn btn-outline-primary" itemid="product-id-js-{{ product.id }}-wishlist"
+                                            type="button"><span class="fa fa-heart"></span></button> -->
+                                    </div>
+                                {% else %}
+                                <h3>Login to Buy or Add to Cart</h3>
+                                {% endif %}
+                                </div>
+                        </li>
+                        <li class="py-1">                            
+                            <div class="rating mt-1">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
+                            <span>41 reviews</span>
+                        </div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<form id="cart-form" method="post">
+    {% csrf_token %}
+
+    {% for field in cart_form %}
+    {{ field }}
+    {% endfor %}
+
+</form>
+
+
+<!-- SHOP LOGIC FOR CART FUNCTIONALITY -->
+{% block scripts %}
+<script>
+    var cart_url = "{% url 'shop:toggle-item-in-cart' %}";
+</script>
+<script src="{% static '/website/assets/js/shop.js' %}"></script> 
+<!-- SHOP LOGIC FOR CART FUNCTIONALITY -->
+{% endblock scripts %}
+{% endblock %}

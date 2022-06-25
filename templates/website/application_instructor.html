@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if form.errors %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+{% endif %}
+
+<div class="profile main-content" >
+    <!-- Page content -->
+    <div class="container-fluid mt--5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 order-xl-1">
+          <div class="card  shadow">
+            <div class="card-header  border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Apply</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body justify-content-center">
+              <form action="#" id="application-form"  method="POST">
+                {% csrf_token %}
+                <h6 class="heading-small  mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username">{{form.email.label}}</label>
+                        {{form.email}}    
+                      </input>
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">{{form.subject.label}}</label><br>
+                        {{form.subject}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">{{form.message.label}}</label>
+                        {{form.message}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="col-md-12">
+                    <div class="row">
+                        <button type="submit" class="btn btn-success">
+                            Send Email
+                        </button>
+                    </div>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

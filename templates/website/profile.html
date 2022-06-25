@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if form.errors %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+{% endif %}
+
+<div class="profile main-content">
+    <!-- Top navbar -->
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" >
+      <!-- Mask -->
+      <span class="mask  opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 ">Hello {{user.first_name}}</h1>
+            <p class="mt-0 mb-5">This is your profile page. You can edit and view your information</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image" style="padding-bottom: 100px;">
+                  <a href="#">
+                    {% if user.profile_photo %}
+                    <img src="{{ user.profile_photo.url }}" class="rounded-circle" >
+                    {% else %}
+                    <img src="{% static 'assets/images/image.png'%}" class="rounded-circle" >
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+            </div>
+      <!--      <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+              </div>
+            </div>-->
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col-12" style="padding-top: 10px;">
+                  <!--<div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <div>
+                      <span class="heading">22</span>
+                      <span class="description">Friends</span>
+                    </div>
+                    <div>
+                      <span class="heading">10</span>
+                      <span class="description">Photos</span>
+                    </div>
+                    <div>
+                      <span class="heading">89</span>
+                      <span class="description">Comments</span>
+                    </div>
+                  </div>-->
+                    <div class="text-center">
+                        <h3>
+                        {{user.get_full_name}}
+                        </h3>
+                        <div class="h5 font-weight-300">
+                            <i class="ni location_pin mr-2"></i>{{user.username}}
+                        </div>
+                        <div class="h5 mt-4">
+                            <i class="ni business_briefcase-24 mr-2"></i>{{user.email}}
+                        </div>
+                        <div>
+                            <i class="ni education_hat mr-2"></i>University of Computer Science
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" style="padding-top: 10px;" >
+                <button type="button" id="formButton" class="btn btn-success">
+                  {% if user.is_teacher %}
+                  <h4 class="mb-0">Course panel</h4>
+                  {% else %}
+                  <h4 class="mb-0">Apply as an instructor</h4>
+                  {% endif %}
+                </button></div>
+                <div class="col-6" style="padding-top: 10px;">
+                  <button type="button" id="formButton2" class="btn btn-success">
+                    {% if user.is_merchant %}
+                    <h4 class="mb-0">Shop panel</h4>
+                    {% else %}
+                    <h4 class="mb-0">Apply as an Dealer</h4>
+                    {% endif %}
+                </button>
+              </div>
+              <div class="row">
+                
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card  shadow">
+            <div class="card-header  border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">My account</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form action="#" id="login-form" enctype="multipart/form-data"  method="POST">
+                {% csrf_token %}
+                <h6 class="heading-small  mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        {{form.username}}    
+                      </input>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Profile photo</label><br>
+                        {{form.profile_photo}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        {{form.first_name}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>{{form.last_name}}
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Address -->
+                <h6 class="heading-small  mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        {{form.email}}
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-phone_number">Phone Number</label>
+                        {{form.phone_number}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="row">
+                        <button type="submit" class="btn btn-success">
+                            Update
+                        </button>
+                    </div>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block scripts %}
+    <script>
+      $(document).ready(function() {
+      $("#formButton").click(function() {
+      $("#form1").toggle();
+              });
+            });
+      $(document).ready(function() {
+      $("#formButton2").click(function() {
+      $("#form2").toggle();
+              });
+            });
+    </script>
+
+  {% endblock scripts%}
+{% endblock %}

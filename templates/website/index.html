@@ -1,0 +1,656 @@
+{% extends 'basemain.html' %}
+{% load static %}
+{% block content %}
+    <!-- banner section -->
+    <section class="w3l-main-slider" id="home">
+        <div class="container-fluid">
+            <div class="companies20-content">
+                <div class="row ">
+                    <video width="100%" height="auto"  autoplay muted loop >
+                        <source src="{% static 'assets/images/back.mp4' %}" type="video/mp4" style="overflow: hidden;">
+                      </video>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- //banner section -->
+
+
+    <!-- banner bottom section -->
+    <section class="w3l-bottom-grids-6 pb-lg-5 text-center" id="services">
+        <div class="container">
+            <div class="grids-area-hny main-cont-wthree-fea row">
+                <div class="col-lg-4 col-md-6 px-lg-2">
+                    <div class="area-box color-1">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                        <h4><a href="{% url 'shop:home' %}" class="title-head">Shop</a></h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 px-lg-2 mt-md-0 mt-3">
+                    <div class="area-box color-2">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <h4><a href="{% url 'courses:home' %}" class="title-head">Courses </a></h4>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6 px-lg-2 mt-lg-0 mt-3">
+                    <div class="area-box color-3">
+                        <i class="fa fa-coffee" aria-hidden="true"></i>
+                        <h4><a href="{% url 'courses:home' %}" class="title-head">Business & Management</a></h4>
+                    </div>
+                </div> -->
+                <div class="col-lg-4 col-md-6 px-lg-2 mt-lg-0 mt-3">
+                    <div class="area-box color-3">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <h4><a href="{% url 'web:community' %}" class="title-head">Community</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //banner bottom section -->
+
+
+<div style="margin: 8px auto; display: block; text-align:center;">
+
+<!---728x90--->
+
+ 
+</div>
+<section class="w3l-feature-8">
+    <div class="features-main py-5">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Projects You May<span> Love</span></h3>
+            </div>
+            <div class="row">
+                
+                {% for project in hobbielobie_projects %}
+                
+                <div class="col-md-4">
+                    
+                    <div class="card" >
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.name }}</h5>
+                            <a href="{{ project.url }}" class="btn btn-style btn-style-secondary">Know More</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+                    
+
+            </div>
+    </div>
+</section>
+<div style="margin: 8px auto; display: block; text-align:center;">
+</div>
+
+
+<!-- about-2 section -->
+<section class="w3l-about-2 pb-5">
+    <div class="container pb-md-5 pb-4 mb-5">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-5 about-2-secs-right mb-lg-0 mb-4 text-center">
+                <img src="{% static 'assets/images/3784896.jpg' %}" alt="" class="img-fluid img-responsive m-auto" />
+            </div>
+            <div class="col-lg-7 about-2-secs-left pr-lg-5">
+                <h3 class="title-style mb-sm-3 mb-2">
+                    Course</h3>
+                <p>Creativity increases by sharing, not by saving. Innovate, visionalize, express and be an inspiration for others
+                     as  you learn new professional skills with thousands of classes and courses in art, science, business and more.</p>
+                <div class="mt-4">
+                    <a class="btn btn-style btn-style-secondary mt-3" href="{% url 'courses:home' %}">Know more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //about-2 section -->
+<section class="w3l-about-2 pb-5">
+    <div class="container pb-md-5 pb-4 mb-5">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-7 about-2-secs-left pr-lg-5">
+                <h3 class="title-style mb-sm-3 mb-2">
+                    Shop</h3>
+                <p>A platform that lets you sell wherever your customers are- online, in person and everywhere in between.
+                     Bring your products to life through hobbielobie and present it for sale in front of the largest audience available online.</p>
+                <div class="mt-4">
+                    <a class="btn btn-style btn-style-secondary mt-3" href="{% url 'shop:home' %}">Know more</a>
+                </div>
+            </div>
+            <div class="col-lg-5 about-2-secs-right mb-lg-0 mb-4 text-center">
+                <img src="{% static 'assets/images/3901287.jpg' %}" alt="shop" class="img-fluid img-responsive m-auto" />
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-2 section -->
+<section class="w3l-about-2 pb-5">
+    <div class="container pb-md-5 pb-4 mb-5">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-5 about-2-secs-right mb-lg-0 mb-4 text-center">
+                <img src="{% static 'assets/images/6583.jpg' %}" alt="" class="img-fluid img-responsive m-auto" />
+            </div>
+            <div class="col-lg-7 about-2-secs-left pr-lg-5">
+                <h3 class="title-style mb-sm-3 mb-2">
+                    Community</h3>
+                <p> Let’s bring together all the creative minds here to build a community of people with similar interests. </p>
+                <div class="mt-4">
+                    <a class="btn btn-style btn-style-secondary mt-3" href="{% url 'web:community' %}">Know more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //about-2 section -->
+<!-- about-2 section -->
+
+<!-- //about-2 section -->
+
+<!-- 
+    <section id="project" class="w3l-feature-8">
+    <div class="features-main py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-title text-center pb-50">
+                    <h5 class="sub-title mb-15">Featured Works</h5>
+                    <h2 class="title">Projects You May Love</h2>
+                </div> 
+            </div>
+        </div> 
+    </div>
+    <div class="container-fluid">
+        <div class="row project-active">
+            {% for i in projects %}
+            <div class="col-lg-4">
+                <div class="single-project">
+                    <div class="project-image">
+                        <img src={{i.image}} alt="Project">
+                    </div>
+                    <div class="project-content">
+                        <a class="project-title" href="#">{{i.name}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section> -->
+    <!-- courses section -->
+    <!-- <div class="w3l-grids-block-5 py-5">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Pick a Course to <span>Get Started</span></h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c1.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">art</a>
+                                <a href="courses.html">design</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$400</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> Intermediate</li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">Donec sed teus enime</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-md-0 mt-5">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c2.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">Digital</a>
+                                <a href="courses.html">Learn</a>
+                                <a href="courses.html">10% off</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$900</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> High </li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">It's enim ad minim ate</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-lg-0 mt-5">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c3.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">Html</a>
+                                <a href="courses.html">Java</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$99</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> Beginner </li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">Ullamco laboris nisi uts</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c4.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">Website</a>
+                                <a href="courses.html">Wordpress</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$369</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> Intermediate</li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">Donec sed teus enime</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c5.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">Marketing</a>
+                                <a href="courses.html">Edu</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$499</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> High </li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">It's enim ad minim ate</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img src="assets/images/c6.jpg" alt="" class="img-fluid" />
+                            <div class="meta-list">
+                                <a href="courses.html">Study</a>
+                                <a href="courses.html">Accadamic</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6>$289</h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <div class="content-top mb-4 mt-3">
+                                <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                    <li> <i class="fa fa-signal" aria-hidden="true"></i> Beginner </li>
+                                    <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                </ul>
+                            </div>
+                            <h4><a href="courses.html">Ullamco laboris nisi uts</a></h4>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <ul class="rating-list">
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                    <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                        </a></li>
+                                </ul>
+                                <a class="btn btn-style btn-style-primary" href="course.html">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a class="btn btn-style btn-style-secondary mt-sm-3" href="web:about_us">
+                    Browse more courses<i class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+     //courses section -->
+<!-- <div style="margin: 8px auto; display: block; text-align:center;"> -->
+
+<!---728x90--->
+ 
+<!-- </div> --> 
+    <!-- grids section -->
+    <section class="w3l-homeblock1">
+        <div class="w3-services-ab py-5">
+            <div class="container py-md-5 py-4">
+                <div class="w3-services-grids pb-sm-5 mb-sm-4">
+                    <div class="row w3-services-right-grid">
+                        <div class="col-xl-4">
+
+                        </div>
+                        <div class="col-xl-8">
+                            <div class="fea-gd-vv row">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center feature-gd ">
+                                        <div class="icon">
+                                            <i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="icon-info">
+                                            <h5>Flexible Classes</h5>
+                                            <p> Lorem ipsum dolor sit amet, dolor elit.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-md-0 mt-4">
+                                    <div class="d-flex align-items-center feature-gd">
+                                        <div class="icon">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="icon-info">
+                                            <h5>Offline Mode</h5>
+                                            <p> Lorem ipsum dolor sit amet, dolor elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-4 pt-md-2">
+                                    <div class="d-flex align-items-center feature-gd ">
+                                        <div class="icon">
+                                            <i class="fa fa-headphones" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="icon-info">
+                                            <h5>Educator Help</h5>
+                                            <p> Lorem ipsum dolor sit amet, dolor elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-4 pt-md-2">
+                                    <div class="d-flex align-items-center feature-gd">
+                                        <div class="icon">
+                                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="icon-info">
+                                            <h5>Online Classes</h5>
+                                            <p> Lorem ipsum dolor sit amet, dolor elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //grids section -->
+<div style="margin: 8px auto; display: block; text-align:center;">
+
+<!---728x90--->
+ 
+</div>
+    <!-- stats -->
+    
+    <!-- //stats -->
+
+    <!-- testimonial section -->
+   
+    <!-- //testimonial section -->
+
+    <!-- team section 
+    <section class="w3l-team py-sm-5 pb-sm-0 pb-5">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">World Class <span>Instructors</span></h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-block-single">
+                        <div class="team-grids">
+                            <a href="#team-single">
+                                <img src="assets/images/team1.jpg" class="img-fluid" alt="">
+                                <div class="team-info">
+                                    <div class="social-icons-section">
+                                        <a class="fac" href="#facebook">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a class="twitter mx-2" href="#twitter">
+                                            <span class="fa fa-twitter"></span>
+                                        </a>
+                                        <a class="google" href="#google-plus">
+                                            <span class="fa fa-google-plus"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="team-bottom-block p-4">
+                            <h5 class="member mb-1"><a href="#team">Olive Yew</a></h5>
+                            <small>Teaches Design</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mt-sm-0 mt-5">
+                    <div class="team-block-single">
+                        <div class="team-grids">
+                            <a href="#team-single">
+                                <img src="assets/images/team2.jpg" class="img-fluid" alt="">
+                                <div class="team-info">
+                                    <div class="social-icons-section">
+                                        <a class="fac" href="#facebook">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a class="twitter mx-2" href="#twitter">
+                                            <span class="fa fa-twitter"></span>
+                                        </a>
+                                        <a class="google" href="#google-plus">
+                                            <span class="fa fa-google-plus"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="team-bottom-block p-4">
+                            <h5 class="member mb-1 active"><a href="#team">Aida Joe</a></h5>
+                            <small>UI/UX Designer</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
+                    <div class="team-block-single">
+                        <div class="team-grids">
+                            <a href="#team-single">
+                                <img src="assets/images/team3.jpg" class="img-fluid" alt="">
+                                <div class="team-info">
+                                    <div class="social-icons-section">
+                                        <a class="fac" href="#facebook">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a class="twitter mx-2" href="#twitter">
+                                            <span class="fa fa-twitter"></span>
+                                        </a>
+                                        <a class="google" href="#google-plus">
+                                            <span class="fa fa-google-plus"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="team-bottom-block p-4">
+                            <h5 class="member mb-1"><a href="#team">Teri Dac</a></h5>
+                            <small>Teaches Skills</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mt-lg-0 mt-5">
+                    <div class="team-block-single">
+                        <div class="team-grids">
+                            <a href="#team-single">
+                                <img src="assets/images/team4.jpg" class="img-fluid" alt="">
+                                <div class="team-info">
+                                    <div class="social-icons-section">
+                                        <a class="fac" href="#facebook">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a class="twitter mx-2" href="#twitter">
+                                            <span class="fa fa-twitter"></span>
+                                        </a>
+                                        <a class="google" href="#google-plus">
+                                            <span class="fa fa-google-plus"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="team-bottom-block p-4">
+                            <h5 class="member mb-1"><a href="#team">Anton Bne</a></h5>
+                            <small>Web Designer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     -->
+
+    <!-- about-2 section -->
+    <section class="w3l-about-2 pb-5">
+        <div class="container pb-md-5 pb-4 mb-5">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-5 about-2-secs-right mb-lg-0 mb-4 text-center">
+                    <img src="{% static 'assets/images/image.png'%}" alt="" class="img-fluid img-responsive m-auto" />
+                </div>
+                <div class="col-lg-7 about-2-secs-left pr-lg-5">
+                    <h3 class="title-style mb-sm-3 mb-2">
+                        Not Sure Where to Begin? <br>Contact Now, We will Help you</h3>
+                    <p>Like what you see! Got something to share? or stuck somewhere?
+                        Reach out to us </p>
+                    <div class="mt-4">
+                        <a class="btn btn-style btn-style-secondary mt-3" href="{% url 'web:contact_us' %}">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //about-2 section -->
+{% endblock %}

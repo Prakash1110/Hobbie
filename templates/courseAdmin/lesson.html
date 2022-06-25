@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Form testing</h1>
+    <form action="{% url 'course-lesson-save' pk%}" method='post' novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Submit</button>
+    </form>
+{% endblock %}

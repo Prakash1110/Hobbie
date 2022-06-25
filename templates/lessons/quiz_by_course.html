@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% load index %}
+{% block content %}
+
+<div class="container mt-3" style="overflow: hidden;">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="accordion">
+                <div class="card">
+                    <div id="" class="collapse show" aria-labelledby="" data-parent="#accordionExample">
+                        <div class="card-body" style="padding:0;">
+                            <table style="width: 100%;">
+
+
+                                {% for course_module in course_modules %}
+                                <tr style="width: 100%; padding: 5px 0px;">
+                                    <td style="text-align: left;padding:10px; border-bottom:1px solid #ccc;"
+                                        colspan="2">
+                                        <h3>{{ course_module.name }}</h3>
+                                    </td>
+                                </tr>
+
+                                {% for course_item in course_module.course_items.all %}
+                                {% if course_item.type == 'LS' %}
+                                <tr style="width: 100%; padding: 5px 0px;">
+                                    <td style="text-align: left;padding:10px; border-bottom:1px solid #ccc;">
+
+
+                                        <a href="{% url 'accounts:course-lessons-single' slug=course.slug id=course_item.lesson.id %}"
+                                            id="{{ lesson.id }}">
+
+                                            {{ course_item.lesson.title }}
+                                        </a>
+                                    </td>
+                                    <td style="text-align: right; padding:10px; border-bottom:1px solid #ccc;">
+                                        <span class="lesson_duration">
+                                            {{ lesson.duration | floatformat:2 }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr style="width: 100%; padding: 5px 0px;">
+                                    <td style="text-align: left;padding:10px; border-bottom:1px solid #ccc;"
+                                        colspan="2">
+                                        <a
+                                            href="{% url 'accounts:quiz_view' slug=course.slug quiz_id=course_item.quiz.id %}">
+                                            Quiz: {{ course_item.quiz.name }}
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" style="overflow: hidden; min-height: calc(100vh - 150px);">
+
+            {% if reattempt_form %}
+            <div class="card">
+
+                <form id='reattempt_quiz_form' action="{% url 'accounts:reattempt-quiz' %}">
+                    <div class="card-body text-center">
+                        <h4 style="margin-bottom: 10px;">
+                            Your score for the previous score was <strong>{{ quiztaker.correct_answers_num }}</strong>
+                            out of <strong>{{ questions.count }}</strong>
+                        </h4>
+                        {% csrf_token %}
+
+                        {% for field in reattempt_form %}
+                        {{ field }}
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <input class="btn btn-primary" type="submit" value="Reattempt the quiz">
+                    </div>
+                </form>
+            </div>
+
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <h3>{{ forloop.counter }}. {{ questions|index:forloop.counter }} </h3>
+                            </div>
+                            <div class="card-body">
+                                {% for radio in field %}
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        {{ radio.tag }}
+                                        {{ radio.choice_label }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+    $('#reattempt_quiz_form').submit(function (e) {
+        e.preventDefault();
+        if (confirm('Do you want to attempt the quiz again?')) {
+            var serializedData = $(this).serialize();
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: "{% url 'accounts:reattempt-quiz' %}",
+                    data: serializedData,
+                    success(response) {
+                        if (response['status'] === 'success') {
+                            location.reload();
+                        }
+                    }
+                }
+            )
+        }
+
+    })
+</script>
+{% endblock scripts %}

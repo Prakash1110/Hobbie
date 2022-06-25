@@ -1,0 +1,9 @@
+from django.contrib import admin
+from .models import Product, Category, Cart, ProductBuyHistory, ProductOrder
+
+
+admin.site.register(Product)
+admin.site.register(Category)
+admin.site.register(Cart)
+admin.site.register(ProductOrder)
+admin.site.register(ProductBuyHistory)

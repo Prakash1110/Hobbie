@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load total_minutes %}
+
+{% block content %}
+{% if cart %}
+<a class="float-right" href="{% url 'courses:cart' %}">
+    <button class="btn btn-style-primary btn-primary" id="cart" style="font-size: larger;">
+        cart <i class="fa fa-cart-plus"></i> {{ items_in_cart.count }}
+    </button>
+</a>
+{% endif %}
+
+    <section>
+        <div class="container py-md-5 py-4 mb-5">
+        </div>
+    </section>
+    <div style="margin: 8px auto; display: block; text-align:center;">
+    
+        <!---728x90--->
+         
+        </div>
+
+    <section class="w3l-about-3 pb-5 pt-2" style="padding: top 100px">
+        <div class="container py-md-5 py-4 mb-5">
+            <div class="jumbotron">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-6 pr-lg-5">
+                    <h3 class="title-big">{{course.title}}</h3>
+                    <h3><p class="mt-2"><b>{{course.description}}</b></p></h3>
+                    <h4><div class=" mt-sm-2"><b>Includes:</b></div>
+                    <ul class="list-about-2 mt-1">
+                        <li class="py-1"><i class="fa fa-check-square-o mr-2" aria-hidden="true"></i>On demand videos</li>
+                        <li class="py-2"><i class="fa fa-check-square-o mr-2" aria-hidden="true"></i>Full lifetime access</li>
+                        <li class="py-1"><i class="fa fa-check-square-o mr-2" aria-hidden="true"></i>{{ course.lessons.count }}  lessons</li>
+                    </ul>
+                    
+                    <div class="price" style="padding-bottom: 20px; padding-top: 20px;">
+                        <span class="current-price">
+                            {% if not is_enrolled %}
+                            <h3>$<span class="current-price">{{ course.price | floatformat:2 | intcomma }}</span></span></h3>
+                            {% endif %}
+                        <input type="hidden" id="total_price_of_checking_out" value="{{ course.price | floatformat:2 }}">
+                    </div>
+
+                    {#                            {{ --<div class="buy-btns">--}}#}
+                    {#                            {{ --<button class="btn btn-buy-now" type="button">Already purchased</button>--}}#}
+                    {#                            {{ --</div>--}}#}
+                    <div class="buy-btns" style="padding-bottom: 10px;">
+                        {% if is_enrolled %}
+                            <a href="{% url 'accounts:course-lessons' slug %}">
+                            <button class="btn btn-add-cart" type="button"
+                                    style="background-color: #00796b; border-color: #08796f; color: #ffffff">
+                                Go to course
+                            </button>
+                        </a>
+                        {% else %}
+                            {% if course in items_in_cart %}
+                            <a href="{% url 'courses:cart' %}">
+                                <button class="add-to-cart btn btn-primary cart-btn-js"
+                                itemid="course-id-js-{{ course.pk }}">Added to Cart</button>
+                            </a>
+                            {% else %}
+                            <button class="add-to-cart btn btn-outline-primary cart-btn-js"
+                                itemid="course-id-js-{{ course.pk }}">Add to Cart</button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="col-lg-6 about-2-secs-right mt-lg-0 mt-5">
+                    <img src="{{course.thumbnail.url }}" alt="" class="img-fluid img-responsive" />
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <form id="cart-form" method="post">
+        {% csrf_token %}
+
+        {% for field in cart_form %}
+        {{ field }}
+        {% endfor %}
+
+    </form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var cart_url = "{% url 'courses:toggle-item-in-cart' %}";
+</script>
+<script src="{% static '/assets/js/course.js' %}"></script> 
+<!-- course LOGIC FOR CART FUNCTIONALITY -->
+{% endblock scripts %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- courses section -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-md-4">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"><a href="{% url 'courses:cart' %}" >
+                <button class="btn btn-primary" id="cart" style="font-size: larger;">
+                    cart <i class="fa fa-cart-plus"></i> {{ items_in_cart.count }}
+                </button>
+            </a></div>
+          </div>
+        <div class="w3l-grids-block-5 w3l-grids-block-6 py-5">
+            <div class="container py-md-5 py-4">
+                <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                    <h3 class="title-main">Our <span>Courses</span></h3>
+                </div>
+                <div class="row">
+                    {% for course in courses%}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="blog-card-single">
+                            <div class="grids5-info position-relative">
+                                <img style="height: 200px; width: 600px;" src="{{ course.thumbnail.url }}" alt="" class="img-fluid" />
+                                <div class="meta-list"> 
+                                    <a href="courses.html">{{course.category}}</a>
+                                </div>
+                                <div class="course-price-item">
+                                    <h6>Rs.{{ course.price }}</h6>
+                                </div>
+                            </div>
+                            <div class="content-main-top">
+                                <div class="content-top mb-4 mt-3">
+                                    <ul class="list-unstyled d-flex align-items-center justify-content-between">
+                                        <li> <i class="fa fa-signal" aria-hidden="true"></i> Intermediate</li>
+                                        <li> <i class="fa fa-clock-o" aria-hidden="true"></i> 10 week</li>
+                                    </ul>
+                                </div>
+                                <h4><a href="blog-single.html">{{course.title}}</a></h4>
+                                <p>{{ course.short_description }} </p>
+                                <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                    <ul class="rating-list">
+                                        <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                            </a></li>
+                                        <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                            </a></li>
+                                        <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                            </a></li>
+                                        <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                            </a></li>
+                                        <li><a href="#rate"><i class="fa fa-star" aria-hidden="true"></i>
+                                            </a></li>
+                                    </ul>
+                                    <a class="btn btn-style btn-style-primary" href="{% url 'courses:course-details' course.slug %}">Know Details<i
+                                            class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <!-- pagination -->
+                <div class="pagination-style text-center">
+                    <ul>
+                        <li> <a href="#none" class="not-allowed" disabled="">
+                                <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li><a class="active" href="#page">1</a></li>
+                        <li>
+                            <a href="#page">2</a>
+                        </li>
+                        <li>
+                            <a href="#page">3</a>
+                        </li>
+                        <li>
+                            <a href="#page"><span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //pagination -->
+            </div>
+        </div>
+        <!-- //courses section -->
+    <div style="margin: 8px auto; display: block; text-align:center;">
+    
+    <!---728x90--->
+     
+    </div>
+    <section class="w3_stats py-sm-5 pt-sm-0 pt-5" id="stats">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Strength in <span>Numbers</span></h3>
+                <p class="mt-4 pt-md-2">Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et
+                    dolorum
+                    fuga.</p>
+            </div>
+            <div class="w3-stats">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="counter">
+                            <div class="timer count-title count-number" data-to="6300" data-speed="1500"></div>
+                            <p class="count-text">Learners & counting</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mt-sm-0 mt-4">
+                        <div class="counter">
+                            <div class="timer count-title count-number" data-to="638" data-speed="1500"></div>
+                            <p class="count-text">Total courses</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mt-lg-0 mt-4">
+                        <div class="counter">
+                            <div class="timer count-title count-number" data-to="7600" data-speed="1500"></div>
+                            <p class="count-text">Successful students</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mt-lg-0 mt-4">
+                        <div class="counter border-right-0">
+                            <div class="timer count-title count-number" data-to="36" data-speed="1500"></div>
+                            <p class="count-text">Languages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- team section -->
+    <section class="w3l-team py-sm-5 pb-sm-0 pb-5">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">World Class <span>Instructors</span></h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-3 col-sm-6 ">
+                    {% for team in teams %}
+                    <div class="team-block-single">
+                        <div class="team-grids">
+                            <a href="#team-single">
+                                <img src="{{team.image.url}}" class="img-fluid" alt="">
+                                <div class="team-info">
+                                    <div class="social-icons-section">
+                                        <a class="fac" href="{{team.fb_url}}">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a class="twitter mx-2" href="{{team.twitter_url}}">
+                                            <span class="fa fa-twitter"></span>
+                                        </a>
+                                        <a class="instagram mx-2" href="{{team.instagram_url}}">
+                                            <span class="fa fa-instagram"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="team-bottom-block p-4">
+                            <h5 class="member mb-1 active"><a href="#team">{{team.name}}</a></h5>
+                            <small>{{team.post}}</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //team setion -->
+{% endblock %}

@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Edocom - Education & LMS Template">
+
+    <!-- ========== Page Title ========== -->
+    <title>Hobbie Lobie</title>
+
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="{% static 'ui/assets/img/favicon_io/favicon.png' %}" type="image/x-icon">
+
+    <!-- ========== Start Stylesheet ========== -->
+    <link href="{% static 'ui/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/flaticon-set.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/owl.theme.default.min.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/bootsnav.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/style.css' %}" rel="stylesheet">
+    <link href="{% static 'ui/assets/css/responsive.css' %}" rel="stylesheet">
+    <!-- ========== End Stylesheet ========== -->
+
+
+
+    <!-- jQuery Frameworks
+    ============================================= -->
+
+    <script src="{% static 'ui/assets/js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'ui/assets/js/jquery.appear.js' %}"></script>
+    <script src="{% static 'ui/assets/js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'ui/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'ui/assets/js/jquery.nice-select.min.js' %}"></script>
+
+    <!-- jQuery Frameworks
+    ============================================= -->
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5/html5shiv.min.js"></script>
+    <script src="assets/js/html5/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ========== Google Fonts ========== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Preloader Start -->
+<div class="se-pre-con"></div>
+<!-- Preloader Ends -->
+
+<!-- Start Header Top
+============================================= -->
+<div class="top-bar-area bg-dark inc-border text-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 address-info text-left">
+                <div class="navbar-header">
+                    <a href="{% url 'shopAdmin:home' %}">ADMIN SHOP</a>
+                </div>
+            </div>
+
+            <div class="col-md-8 link text-right">
+                <ul>
+                    <li>
+                        <a href="{% url 'shopAdmin:add_items' %}">Add Items</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Header Top -->
+
+{% block content %}
+
+{% endblock %}
+
+<!-- Start Footer Bottom -->
+<footer class="bg-light">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; Copyright 2020. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-right link">
+                    <ul>
+                        <li>
+                            <a href="{% url 'web:privacy' %}">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#">License</a>
+                        </li>
+                        <li>
+                            <a href="#">Support</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Bottom -->
+</footer>
+<!-- End Footer -->
+
+<script src="{% static 'ui/assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/equal-height.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/modernizr.custom.13711.js' %}"></script>
+<script src="{% static 'ui/assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/wow.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/progress-bar.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/count-to.js' %}"></script>
+<script src="{% static 'ui/assets/js/YTPlayer.min.js' %}"></script>
+<script src="{% static 'ui/assets/js/loopcounter.js' %}"></script>
+<script src="{% static 'ui/assets/js/bootsnav.js' %}"></script>
+<script src="{% static 'ui/assets/js/main.js' %}"></script>
+
+</body>
+</html>

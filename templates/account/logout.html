@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div style="margin: 8px auto; display: block; text-align:center;">
+
+  <!---728x90--->
+
+   
+  </div>
+  <section class="w3l-feature-8">
+    <div class="features-main py-5">
+      <div class="container text-center py-md-5 py-4">
+        <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+          <h3 class="title-main">{% trans "Sign Out" %}</h3>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="w3l-feature-8">
+        <div class="container text-center py-md-5 py-4">
+          <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+    <!---728x90--->
+    <h3 class="title-style mb-sm-3 mb-2">
+      <p>{% trans 'Are you sure you want to sign out?' %}</p></h3>
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+      {% endif %}
+      <button type="submit">{% trans 'Sign Out' %}</button>
+    </form>
+     </div>
+     </div>
+     </section>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Redirecting to paytm payments gateway...</h1>
+    <h2>Do not refresh this page...</h2>
+    <form action="https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid={{mid}}&orderId={{orderId}}" method="POST" name="paytm">
+        <input type="hidden" name="mid", value={{mid}}>
+        <input type="hidden" name="orderId", value= {{orderId}}>
+        <input type="hidden" name="txnToken", value={{txnToken}}>
+    </form>
+    <script>
+        document.paytm.submit();
+    </script>
+</body>
+</html>

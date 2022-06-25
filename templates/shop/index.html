@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<script>
+    window.addEventListener("pageshow", function (event) {
+    var historyTraversal = event.persisted ||
+        (typeof window.performance != "undefined" &&
+            window.performance.navigation.type === 2);
+    if (historyTraversal) {
+        // Handle page restore.
+        window.location.reload();
+    }
+});
+</script>
+
+<section >
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-md-4">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"><a href="{% url 'shop:cart' %}" >
+            <button class="btn btn-primary" id="cart" style="font-size: larger;">
+                cart <i class="fa fa-cart-plus"></i> {{ items_in_cart.count }}
+            </button>
+        </a></div>
+      </div>
+    <div class="w3l-grids-block-5 w3l-grids-block-6 py-5">
+        <div class="container py-md-5 py-4">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Our <span>Products</span></h3>
+                {% include 'messages.html' %}
+            </div>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card-single">
+                        <div class="grids5-info position-relative">
+                            <img style="height: 200px; width: 600px;" src="{{ product.image.url }}" alt="" class="img-fluid img-rounded img-responsive" />
+                            <div class="meta-list"> 
+                                <a href="courses.html">{{product.category}}</a>
+                            </div>
+                            <div class="course-price-item">
+                                <h6><Strong>
+                                    Rs.  
+                                    {% if product.discounted_price != 0 %}
+                                        {{ product.discounted_price }}
+                                        {% else %}
+                                        {{ product.price }}
+                                    {% endif %}
+
+                                </Strong>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="content-main-top">
+                            <h4><a href="{% url 'shop:product-detail' product.slug %}">{{product.title}}</a></h4>
+                            <p>{{ product.description|slice:"75" }}{% if product.description|length > 75 %}...{% endif %}</p>
+                        <div class="actions row-md-2 mt-2" style="padding-bottom: 10px;">
+                                <!--<button class="btn btn-outline-primary float-left" >Rating placeholder</button>--> 
+                                    
+                                {% if cart %}
+                                    <a href="{% url 'shop:product-checkout' product.slug %}"><button class="btn btn-info float-left buy-btn-js" itemid="product-buy-js-{{ product.id }}">Buy Now</button></a>
+                                    
+                                    {% if product in items_in_cart %}
+                                        <button class="btn btn-primary float-right cart-btn-js" itemid="product-id-js-{{ product.id }}">Added to Cart</button>
+                                    {% else %}
+                                        <button class="btn btn-outline-primary float-right cart-btn-js" itemid="product-id-js-{{ product.id }}">Add to Cart</button>
+                                    {% endif %}
+                                        
+                                {% endif %}
+                                <!--<button class="btn btn-primary" style="margin-left: 1em" >Edit</button> -->  
+                        </div>
+                            <div class="top-content-border d-flex align-items-center justify-content-between mt-5 pt-4">
+                                <a class="btn btn-style btn-style-primary" href="{% url 'shop:product-detail' product.slug %}">Know Details<i
+                                        class="fa fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+            <!-- pagination -->
+            <div class="pagination-style text-center">
+                <ul>
+                    <li> <a href="#none" class="not-allowed" disabled="">
+                            <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    <li><a class="active" href="#page">1</a></li>
+                    <li>
+                        <a href="#page">2</a>
+                    </li>
+                    <li>
+                        <a href="#page">3</a>
+                    </li>
+                    <li>
+                        <a href="#page"><span class="fa fa-angle-double-right" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- //pagination -->
+        </div>
+    </div>
+
+</section>
+
+<form id="cart-form" method="post">
+{% csrf_token %}
+
+{% for field in cart_form %}
+    {{ field }}
+{% endfor %}
+    
+</form>
+
+<!-- SHOP LOGIC FOR CART FUNCTIONALITY -->
+
+
+{% block scripts %}
+<script>
+    var cart_url = "{% url 'shop:toggle-item-in-cart' %}";
+</script>
+<script src="{% static 'assets/js/shop.js' %}"></script> 
+
+{% endblock scripts %}
+    
+
+
+{% endblock %}

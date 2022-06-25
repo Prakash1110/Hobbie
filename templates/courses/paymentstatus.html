@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%if RESPCODE == '01' %}
+        <tr class="table-success">
+            <th scope="row">Status</th>
+            <td>Transaction successful</td>
+        </tr>
+        {%else%}
+        <tr class="table-danger">
+            <th scope="row">Status</th>
+            <td>Transaction failed</td>
+        </tr>
+        <tr class="table-danger">
+            <th scope="row">Details</th>
+            <td>{{RESPMSG}}</td>
+        </tr>
+        {%endif%}
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">Order Id</th>
+            <td>{{ORDERID}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Txn Id</th>
+            <td>{{TXNID}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Txn Amount</th>
+            <td>{{TXNAMOUNT}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Payment Mode</th>
+            <td>{{PAYMENTMODE}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Txn Date & Time</th>
+            <td>{{TXNDATE}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Gateway</th>
+            <td>{{GATEWAY}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Bank Txn Id</th>
+            <td>{{BANKTXNID}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Bank name</th>
+            <td>{{BANKNAME}}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+<script>
+    window.addEventListener('popstate', (event) => {
+        // console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+    });
+    history.pushState({ view: 1 }, "home", "http://127.0.0.1:8000/");
+    setTimeout(function () {
+        window.location = 'course/'
+    }, 10000);
+</script>
+
+{%endblock%}

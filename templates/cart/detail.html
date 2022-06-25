@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+
+<section class="w3l-feature-8">
+    <div class="features-main" style="padding-top:20px">
+        <div class="container ">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Checkout</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section  id="project" class="project-area pt-125 pb-130" style="overflow: hidden;">
+    <div class="container jumbotron">
+        <div class="row">
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+        <div class="col-sm-6">
+            <div class="row">
+                {% for item in cart %}
+                {% with course=item.course %}
+                <div class="col-md-8" itemid="product-card-{{ product.id }}">
+                        <div style="padding-left: 80px; padding-bottom :20px">
+                            <img  style="max-width: 300px; padding-bottom: 25px;" src={{course.thumbnail.url}} alt="Project">
+                        </div>
+                </div>
+        </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="jumbotron" >
+                <h4 class="mb-2">Checkout Details</h4>
+                <table class="table" style="color : var(--text-colour)" >
+                    <tr>
+                        <td>
+                            Title
+                        </td>
+                        <td>{{ course.title }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                           Description
+                        </td>
+                        <td>
+                            {{ course.description|slice:"75" }}{% if product.description|length > 75 %}...{% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Price
+                        </td>
+                        <td class >
+                            Rs. {{ course.price | floatformat:2 | intcomma }} 
+                        </td>
+                    </tr>
+                </table>
+                    {% endwith %}
+                    {% endfor %}
+                <div class="float-right" style="font-size: larger;">
+                    <a href="{% url 'cart:cart_checkout' %}" class="btn btn-primary btn-block checkout-btn">Checkout
+                    </a>                     
+                    <!-- Trigger the modal with a button -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-12 title text-center">Cart is empty</div>
+{% endif %}
+{% endwith %}
+    </div>
+</section>
+
+
+{% endblock %}

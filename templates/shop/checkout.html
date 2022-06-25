@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="w3l-feature-8">
+    <div class="features-main" style="padding-top:20px">
+        <div class="container ">
+            <div class="title-heading-w3 text-center mx-auto mb-5 pb-sm-4">
+                <h3 class="title-main">Checkout</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section  id="project" class="project-area pt-125 pb-130" style="overflow: hidden;">
+    <div class="container jumbotron">
+        <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+            {% for product in products %}
+            
+                <div class="col-md-8" itemid="product-card-{{ product.id }}">
+                        <div style="padding-left: 80px; padding-bottom :20px">
+                            <img  style="max-width: 300px; padding-bottom: 25px;" src={{product.image.url}} alt="Project">
+                            <h2 class="display-5"> {{ product.title }} </h2>
+                            <p class="lead">
+                                {{ product.description|slice:"75" }}{% if product.description|length > 75 %}...{% endif %}
+                                <span class="mt-10 d-block" style="font-size: x-large;"> <Strong>
+                                    Rs.
+                                    {% if product.discounted_price != 0 %}
+                                    {{ product.discounted_price }}
+                                    <del>{{ product.price }}</del>
+                                    {% else %}
+                                    {{ product.price }}
+                                    {% endif %}
+                                </Strong></span>
+                        </p>
+                        </div>
+                        <!--
+                        <div class="card-body" style="text-align: left;">
+                            <h5 class="card-title"> {{ product.title }} </h5>
+                            <p class="card-text">
+                                {{ product.description|slice:"75" }}{% if product.description|length > 75 %}...{% endif %}
+
+                                <span class="mt-10 d-block" style="font-size: x-large;"> <Strong>
+                                        Rs.
+                                        {% if product.discounted_price != 0 %}
+                                        {{ product.discounted_price }}
+                                        <del>{{ product.price }}</del>
+                                        {% else %}
+                                        {{ product.price }}
+                                        {% endif %}
+                                    </Strong></span>
+                            </p>
+                            <div class="row-md-2 mt-2">-->
+                                <!-- <button class="btn btn-primary float-right cart-btn-js" itemid="product-id-js-{{ product.id }}">Remove from Cart</button> -->
+                                <!-- <button class="btn btn-primary" style="margin-left: 1em" >Edit</button> -->
+                            <!--</div>
+                        </div>-->
+                    
+                </div>
+            
+            {% endfor %}
+        </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="jumbotron" >
+                <h4 class="mb-2">Checkout Details</h4>
+                <table class="table" style="color : var(--text-colour)" >
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            {{ user.get_full_name }} 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Phone Number
+                        </td>
+                        <td>
+                            {{ user.phone_number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total Price
+                        </td>
+                        <td class >
+                            Rs. {{ total_price }} 
+                        </td>
+                    </tr>
+                    <tr >
+                        <td>
+                            Number of items
+                        </td>
+                        <td >
+                            {{ number_of_items }}
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                <h5>
+                    Select Address
+                </h5>
+                <div>
+                    <form id = 'PlaceOrderForm' action="{% url 'shop:place-order' %}" method="post" class="form-group m-2" style="color: black;">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field }}
+                        {% endfor %}
+                            
+                    </form>
+                </div>
+                </div>
+                <div class="float-right" style="font-size: larger;">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addAddressModal">
+                        Add Address
+                    </button> 
+                    <button type="submit" form="PlaceOrderForm" class="btn btn-primary ">Place Order</button>                     
+                    <a href="{% url 'shop:home' %}">
+                        <button class="btn btn-primary">
+                            Cancel Order
+                        </button>
+                    </a>
+                    <!-- Trigger the modal with a button -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- Modal --><!-- Modal -->
+<div class="modal fade" id="addAddressModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="address_form">
+              {% csrf_token %}
+              {% for field in address_form %}
+                  {{ field }}
+              {% endfor %}
+                
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" form="address_form" class="btn btn-primary">Add Address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block scripts %}
+<script>
+    $(document).ready(
+        function() {
+            $("#address_form").submit(
+                function (e){
+                    e.preventDefault();
+                    const serializedData = $(this).serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: "{% url 'shop:add-address' %}",
+                        data: serializedData,
+                        success: function (response) {
+                            if (response["is_saved"]){
+                                location.reload();
+                            }
+                            else{
+                                alert("Address could not be saved."+
+                                "Please try again.");
+                            }
+                        },
+                        error: function (){
+                            alert("Address could not be saved."+
+                                "Please try again.");
+                        }
+                    })
+                }
+            )
+        }
+    )
+</script>
+{% endblock scripts %}
+{% endblock %}

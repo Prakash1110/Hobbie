@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container my-5">
+        <h1>Quiz questions... </h1>
+        <div class="card">
+            <div class="card-header">
+                <b>Questions</b>
+                {% csrf_token %}
+            </div>
+            {% for qc in params %}
+            <div class="card-body">
+                {% with qc.0 as question %}
+                
+                <h5 class="card-title">Question Num. : <span id="question-num {{question.pk}}"> {{question.number}} </span> </h5>
+                <h5 class="card-text" id="question {{question.pk}}">{{question.label}} </h5>
+                <br>
+                <button class="btn btn-danger delete-question" id="del-{{question.pk}}">Delete question</button>
+                <button class="btn btn-primary edit-question" id="edit-{{question.pk}}">Edit</button>
+                {% comment %} <a href="{% url 'question-edit' question.pk %}" class="btn btn-success">Edit</a> {% endcomment %}
+                
+                <br>
+                <br>
+                {% endwith %}
+                <h5>Choices</h5>
+                <hr>
+                {% with qc.1 as choices %}
+                    {% for ch in choices %}  
+                    {% if ch.is_correct %}
+                    
+                    <p class="card-text bg-success" style="color : white; font-size : 20px"><span id="choice-{{ch.pk}}">{{ch.text}}</span> 
+                    {% comment %} <span style="position:relative; left:75%" > Correct choice</span> {% endcomment %}
+                    {% else %}
+                    <p class="card-text bg-light" style="color : black; font-size:20px"><span id="choice-{{ch.pk}}">{{ch.text}}</span>
+                    {% endif %}
+                    <button class="btn btn-primary edit-choice" id="choiceEdit-{{ch.pk}}" style="font-size : 10px;position:absolute; left:90%">Edit</button>
+                    {% comment %} <a class="btn btn-primary" href="{% url 'choice-edit' ch.pk %}" style="font-size : 10px;position:absolute; left:50%">EDIT</a> {% endcomment %}
+                    </p>
+                    <hr>
+                    {% endfor %}
+                {% endwith %}
+                
+                {% comment %} <button class="btn btn-danger delete-item" id="">Delete lesson</button> {% endcomment %}
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'add-questions' pk %}" class="btn btn-primary">Add questions</a>
+
+    </div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <script src="{% static 'courseAdmin/js/questionview.js' %}"></script> <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+{% endblock %}
+
+
+
+
+

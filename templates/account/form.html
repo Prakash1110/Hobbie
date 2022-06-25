@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }}{{ block.super }}{% endblock title %}
+
+{% block content %}
+<div class="banner-image bg_cover" style="background-image: url({% static 'website/assets/images/black1.jpg' %})" style="overflow: hidden;">
+    <section id="about" class="testimonial-area pt-130 pb-130 gray-bg">
+        <div class="container">
+            <div class="testimonial-bg bg_cover pt-80 pb-80" style="background-image: url({% static 'website/assets/images/testimonial/testimonial-bg.jpg' %})">
+              
+                <div class="container">
+
+                    <div class="col-md-8 offset-1">
+                        <h1>{{ title }}</h1>
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <hr>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form-group">
+                                    <label for="id_{{ field.name }}">{{ field.label }}</label>
+                                    {#                    {{ field.field.icon|safe }}#}
+                                    <input type="{{ field.field.widget.input_type }}"
+                                           class="form-control"
+                                           name="{{ field.name }}"
+                                           id="id_{{ field.name }}"
+                                           placeholder="{{ field.field.widget.attrs.placeholder }}">
+                                </div>
+                            {% endfor %}
+                            <br>
+                            <input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
+                            {% if request.path == "/login" %}
+                                Don't Have an Account <a href="{% url 'accounts:register' %}">Register Here.</a>
+                            {% else %}
+                                Have an Account <a href="{% url 'accounts:login' %}">Login Here.</a>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-4 offset-xl-7 col-lg-5 offset-lg-6 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+                </div> <!-- row -->
+            </div> <!-- testimonial bg -->
+        </div> <!-- container -->
+    </section>
+    </div>
+
+
+
+{% endblock %}

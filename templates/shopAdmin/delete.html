@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title  %} Delete Item {% endblock %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="col-lg-8">
+            <h1 style="padding-top: 2%">Delete items</h1>
+            <form method="post">{% csrf_token %}
+                <p style="color: darkred"><strong>
+                    Are you sure you want to delete "{{ object }}"?
+                </strong></p>
+                <button type="submit" class="btn btn-danger" value="confirm">
+                    Confirm
+                </button>
+            </form>
+            <br>
+        </div>
+    </div>
+{% endblock %}

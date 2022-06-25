@@ -1,0 +1,79 @@
+{% extends 'basemain.html' %}
+{% load static %}
+{% block content %}
+
+
+<div style="margin: 8px auto; display: block; text-align:center;">
+
+  <!---728x90--->
+  
+   
+  </div>
+    <!-- Start Login 
+    ============================================= -->
+<div class="w3l-contact py-5" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    <div>
+                      <form action="#" id="login-form" class="white-popup-block" method="POST">
+                        {% csrf_token %}
+                        <div class="login-custom">
+                            <div class="heading">
+                                <h4> Register Now<br> </h4>
+                            </div>
+                            
+                            {% for field in form %}
+                            <div class="form-group">
+                                    <label for="id_{{ field.name }}">{{ field.label }}</label>
+                                    {#                    {{ field.field.icon|safe }}#}
+                                    <input type="{{ field.field.widget.input_type }}"
+                                           class="form-control"
+                                           name="{{ field.name }}"
+                                           id="id_{{ field.name }}"
+                                           placeholder="{{ field.field.widget.attrs.placeholder }}">
+                                </div>
+                            {% endfor %}
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <button type="submit" class="btn btn-success">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="link-bottom">Are you a member? <a href="{% url 'account_login' %}">Login now</a></p>
+                        </div>
+                      </form>
+                    </div>    
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Login Area -->
+
+    <div style="margin: 8px auto; display: block; text-align:center;">
+
+      <!---728x90--->
+      
+       
+    </div>
+    
+
+{% endblock %}

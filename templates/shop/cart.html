@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+</script>
+
+
+<form id="cart-form" method="post">
+{% csrf_token %}
+
+{% for field in cart_form %}
+    {{ field }}
+{% endfor %}
+    
+</form>
+
+
+
+<div class="shopping-cart col-md-8">
+    <!-- Title -->
+    <div class="title">
+      <h4>Shopping Cart</h4>
+    </div>
+    {% for product in items_in_cart %}
+    <!-- Product #1 -->
+    <div class="row col-md-12 item" itemid="product-card-{{ product.id }}">
+   
+      <div class=" col-md-6 image">
+        <a href="{% url 'shop:product-detail' product.slug %}">
+            <img class="card-img-top" style="height: 300px;" src={{product.image.url}} alt="Project"></a>
+      </div>
+   
+      <div class="description justify-content-center">
+        <span>{{ product.title }}</span>
+        <span>{{ product.description|slice:"75" }}{% if product.description|length > 75 %}...{% endif %}</span>
+        <div class="total-price"><Strong>
+            Rs.
+            {% if product.discounted_price != 0 %}
+            {{ product.discounted_price }}
+            <del>{{ product.price }}</del>
+            {% else %}
+            {{ product.price }}
+            {% endif %}
+        </Strong></div>
+        <div class="row justify-content-center">
+            <button class="button btn-primary float-right cart-btn-js" itemid="product-id-js-{{ product.id }}">Remove from Cart</button>
+            <!-- <button class="btn btn-primary" style="margin-left: 1em" >Edit</button> -->
+        </div>
+      </div>
+
+   
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-lg-5">
+      
+    </div>
+    <div class="col-lg-2">
+        <a href="{% url 'shop:home' %}">
+            <button class="btn btn-primary text-center" id="cart" style="font-size: larger;">
+                Home
+             </button></a>
+
+        <a href="{% url 'shop:cart-checkout' %}">
+            <button class="btn btn-primary text-center" id="cart" style="font-size: larger;">
+                Check Out
+             </button></a>
+    </div>
+    <div class="col-lg-5">
+      
+    </div>
+  </div>
+
+
+
+<!-- SHOP LOGIC FOR CART FUNCTIONALITY -->
+
+
+{% block scripts %}
+<script>
+    var cart_url = "{% url 'shop:toggle-item-in-cart' %}";
+    $(document).ready(
+        function () {
+            function check_for_empty() {
+                const parent = $("#cart-items");
+                if (!parent.children().length){
+                    $("#cont").prepend('<h3 class="mt-10 text-center">Your Cart is Empty. Start by adding products to Cart</h3>');
+                }
+            }
+            $(".cart-btn-js").click(function (e) {
+                e.preventDefault();
+                const itemid = $(this).attr("itemid").slice(14);
+               
+                $("#cart-form input[name=itemid]").val(itemid);
+                console.log($("#cart-form input[name=itemid]").val());
+                const serializedData = $("#cart-form").serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: cart_url,
+                    data: serializedData,
+                    success: (response) => {
+                        console.log(response);
+                        if (!response["added_in_cart"]) {
+                            const id = "[itemid=product-card-"+response["product_id"]+"]";
+                            const element = $(id);
+                            const timeout = 300;
+                            element.fadeOut(timeout);
+                            setTimeout(() => {
+                                element.remove();
+                                check_for_empty();
+                            }, timeout);
+                        }
+                        else{
+                            alert("An error has been occurred! Please try to remove the item again!");
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            check_for_empty();
+        }// document empty ready
+    );
+</script>
+
+{% endblock scripts %}
+    
+
+<!-- SHOP LOGIC FOR CART FUNCTIONALITY -->
+
+{% endblock %}

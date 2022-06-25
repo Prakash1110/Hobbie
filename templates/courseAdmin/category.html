@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Form testing</h1>
+    <form action="{% url 'cat-save' %}" method='post'>
+        {% csrf_token %}
+        {{form}}
+        <button>Submit</button>
+    </form>
+{% endblock %}
