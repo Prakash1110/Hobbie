@@ -27,8 +27,8 @@ Clone the repository
 Using the console, navigate to the root directory in which your projects live and clone this project's repository:
 
 ```bash
-git clone git@github.com:getHarsh/getHarsh.git
-cd getHarsh
+git clone git@github.com:Prakash1110/Hobbie.git
+cd Hobbie
 // make your python virtualenv
 virtualenv -p python3 virtualenv
 source virtualenv/bin/activate
